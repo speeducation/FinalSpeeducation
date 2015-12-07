@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1 class="page-header">Dashboard</h1>
+    <a class="btn btn-sm btn-primary pull-right" href="/alumno/agregar/" role="button">Agregar Un Alumno</a>
+    {% if user.is_authenticated %}
+    <h2 class="sub-header">{{ user.first_name }}</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Fecha de registro</th>
+                  <th>Estado</th>
+                  <th>Maestro</th>
+                  <th>Grupo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for alumno in alumnos %}
+                    <tr>
+                      <td>{{ alumno.nombres }}</td>
+                      <td>{{ alumno.apellidos }}</td>
+                      <td>{{ alumno.fecha_registro }}</td>
+                      {% if alumno.activo %}
+                        <td>Activo</td>
+                      {% else %}
+                        <td>Baja temporal</td>
+                      {% endif %}
+                      <td>{{ alumno.maestro}}</td>
+                      <td>{{ alumno.grupo }}</td>
+                      <td><a class="btn btn-sm btn-info" href="/alumno/{{ alumno.pk }}/editar" role="button">Editar</a></td>
+                      <td><a class="btn btn-sm btn-primary" href="/alumno/{{ alumno.pk }}/" role="button">Perfil</a></td>
+                      <td><a class="btn btn-sm btn-danger" href="/alumno/{{ alumno.pk }}/eliminar" role="button">Eliminar</a></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+    {% endif %}
+{% endblock %}

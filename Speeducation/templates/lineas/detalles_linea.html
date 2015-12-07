@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1 class="page-header">Linea: {{ linea.nombre }}</h1>
+    <a class="btn btn-sm btn-primary pull-right" href="/linea/{{ linea.pk }}/actividad/agregar" role="button">Agregar Nueva Actividad</a>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Descripcion</th>
+                  <th>Last Update</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for actividad in actividades %}
+                    <tr>
+                        <td>{{ actividad.descripcion }}</td>
+                        <td>{{ actividad.updated }}</td>
+                        <td><a class="btn btn-sm btn-primary" href="{{ url }}actividad/{{ actividad.pk }}/editar" role="button">Editar</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{{ url }}actividad/{{ actividad.pk }}/eliminar" role="button">Eliminar</a></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+    <a class="btn btn-sm btn-primary pull-right" href="/linea/{{ linea.pk }}/conducta/agregar" role="button">Agregar Nueva Conducta</a>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Descripcion</th>
+                  <th>Last Update</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for conducta in conductas %}
+                    <tr>
+                        <td>{{ conducta.descripcion }}</td>
+                        <td>{{ conducta.updated }}</td>
+                        <td><a class="btn btn-sm btn-primary" href="{{ url }}conducta/{{ conducta.pk }}/editar" role="button">Editar</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{{ url }}conducta/{{ conducta.pk }}/eliminar" role="button">Eliminar</a></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+{% endblock %}
